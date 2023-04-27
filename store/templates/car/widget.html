@@ -1,0 +1,66 @@
+<table class="table table-bordered border border-dark">
+
+    <thead>
+        <tr>
+            <th colspan="3" class="text-center">
+                Shopping Car
+            </th>
+        </tr>
+
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Ammount</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% if request.session.car.items %}
+            {% for key, value in request.session.car.items %}
+
+                <tr class="text-center">
+                    <th>{{value.name}}</th>
+                    <td>{{value.quantity}}</td>
+                    <td>
+                        <a href="{% url 'car:add' value.product_id %}" class="btn btn-sm btn-success">+</a>
+                        <a href="{% url 'car:reduct' value.product_id %}" class="btn btn-sm btn-danger">-</a><br/>
+
+                        $ {{value.price}}
+                    </td>
+                    
+                </tr>
+
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="3">
+                    <div class="alert alert-danger text-center">
+                        Without Products
+                    </div>
+                </td>
+            </tr>
+        {% endif %}
+
+
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td colspan="2">
+                Total: $ {{import_total_car}}
+            </td>
+
+            {% if request.session.car.items %}
+                <td colspan="1">
+                    <a href="{% url 'Order' %}" class="btn btn-success" style="margin-left: 10px;">Buy</a>
+                </td>
+
+            {% else %}
+                <td colspan="1">
+                    <a class="btn btn-secondary" style="margin-left: 10px; cursor: default;">Buy</a>
+                </td>
+            {% endif %}
+        </tr>
+    </tfoot>
+
+</table>

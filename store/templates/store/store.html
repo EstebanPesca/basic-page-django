@@ -1,0 +1,50 @@
+{% extends "projectWebApp/base.html" %}
+
+{% block title %} Store {% endblock %}
+
+{% block content %}
+
+<div class="container bg-white m-auto p-1">
+    <div class="row m-auto">
+        <div class="container col-sm-4 bg-white p-4 rounded border border-2 border-secondary border-opacity-50 mb-auto">
+            <div class="row">
+                <div class="col-sm-12">
+                    {% if request.user.is_authenticated %}
+                        {% include "car/widget.html" %}
+
+                    {% else  %}
+
+                        <div class="alert alert-danger" role="alert">
+                            <p class="text-center">Login in the page to watch your car</p>
+                        </div>
+
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="container col-sm-8 bg-dark rounded border border-2 border-white border-opacity-50 p-3">
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-sm-4">
+                        <div class="card w-100 my-2">
+                            <img src="{{product.image.url}}" alt="Product"
+                            class="card-img card-img-top rounded">
+                            <div class="card-boddy">
+                                <h5 class="card-title text-center m-1 fs-6">{{product.name}}</h5>
+                                <div class="card-info row text-center">
+                                    <p class="card-text col-sm-6">${{product.price}}</p>
+                                    <p class="card-text col-sm-6">Colors: {{ product.color.count }}</p>
+                                </div>
+                                <div class="card-btn text-center">
+                                    <a href="{% url 'car:add' product.id %}" class="btn btn-dark mb-3 mx-2">Add to the car</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div> 
+</div>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "projectWebApp/base.html" %}
+
+{% block title %} Blog {% endblock %}
+
+{% block content %}
+
+    <div class="container d-flex justify-content-center text-uppercase py-3 dropdown-center">
+        <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Categories</button>
+        <ul class="dropdown-menu dropdown-menu-dark">
+            {% for post in posts %}
+                {% for category in post.categories.all %}
+                    <li>
+                        <a class="dropdown-item" href="{% url 'category' category.id %}">{{category.name}}</a>
+                    </li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="container border border-secondary border-opacity-50 mb-4">
+        <table class="table">
+            <thead class="table">
+                <tr>
+                    <th class="col">Image</th>
+                    <th class="col">Title</th>
+                    <th class="col">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in posts %}
+                    <tr class="table">
+                        <td>
+                            <img class="rounded-circle" src="{{post.image.url}}" alt="Image" width="75" height="75">
+                        </td>
+                        <th>
+                            {{post.title}}
+                        </th>
+                        <td>
+                            {{post.contents}}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "projectWebApp/base.html" %}
+
+{% block title %} Contact Us {% endblock %}
+
+{% block content %}
+
+    <div class="container py-5">
+        <div class="border border-opacity-50 border-2 py-5 d-grid justify-content-center">
+
+
+            {% if "valid" in request.GET %}
+
+                <div class="alert alert-success" role="alert">
+                    Email send successfully
+                </div>
+
+            {% elif "wrong" in request.GET %}
+
+                <div class="alert alert-danger" role="alert">
+                    The Email couldn't send, checkout that all it is ok.
+                </div>
+
+            {% endif %}
+
+
+            <form action="" method="POST" class="text-center">
+                {% csrf_token %}
+                <table class="table table-responsive align-middle">
+                    {{formConta.as_table}}
+                </table>
+                <input type="submit" value="Enviar" class="btn btn-dark gap-2 col-6 mx-auto">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

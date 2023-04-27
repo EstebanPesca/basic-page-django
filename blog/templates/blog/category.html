@@ -1,0 +1,49 @@
+{% extends "projectWebApp/base.html" %}
+
+{% block title %} Blog {% endblock %}
+
+{% block content %}
+
+    <div class="container text-uppercase py-3">
+        <nav class="d-flex align-items-baseline justify-content-center">
+            <a class="text-center text-decoration-none text-body fs-6 fw-semibold" href="{% url 'Blog'%}">Categories:&nbsp;</a>
+            <ul class="pagination">
+                {% for post in posts %}
+                    {% for category in post.categories.all %}
+                        <li class="page-item">
+                            <a class="page-link bg-primary text-light" style="cursor: pointer;">{{category.name}}</a>
+                        </li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </nav> 
+    </div>
+
+    <div class="container border border-secondary border-opacity-50 mb-4">
+        <table class="table">
+            <thead class="table">
+                <tr>
+                    <th class="col">Image</th>
+                    <th class="col">Title</th>
+                    <th class="col">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in posts %}
+                    <tr class="table">
+                        <td>
+                            <img class="rounded-circle" src="{{post.image.url}}" alt="Image" width="75" height="75">
+                        </td>
+                        <th>
+                            {{post.title}}
+                        </th>
+                        <td>
+                            {{post.contents}}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

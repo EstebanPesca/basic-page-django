@@ -1,0 +1,41 @@
+{% extends "projectWebApp/base-empty.html" %}
+
+{% block title %} Log in {% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="container-l d-grid justify-content-center" style="margin: 90px 0px 90px 0px;">
+        <div class="bg-secondary border border-2 border-white border-opacity-25 rounded p-5">
+            <form method="POST" action="">
+    
+                {% csrf_token %}
+    
+                <div class="text-center">
+    
+                    <h1 class="h3 my-5 fw-bold">Log in</h1>
+    
+                    <div class="form-floating fs-5">
+                        {{form | crispy}}
+                    </div>
+                    
+                    
+                    <button type="submit" class="btn btn-lg btn-dark mt-4">Login</button>
+    
+                    <br/>
+                    <br/>
+    
+                    {% if messages %}
+                        {% for message in messages %}
+                            <span class="alert alert-{{message.tags}}"> {{message}} </span>
+                        {% endfor %}
+                    {% endif %}
+                    
+                </div>
+    
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

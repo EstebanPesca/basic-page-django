@@ -1,0 +1,25 @@
+{% extends "projectWebApp/base.html" %}
+
+{% block title %} Service {% endblock %}
+
+{% block content %}
+
+    <div class="album" style="padding-top: 50px; padding-bottom: 30px;">
+        <div class="container-xl bg-dark border border-3 rounded-3">
+            <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
+                {% for service in services %}
+                        <div class="col">
+                            <div class="card h-100 border-secondary">
+                                <img class="card-img-top" src="{{service.image.url}}" alt="img" width="250px" height="250px"> 
+                                <div class="card-body">
+                                    <h1 class="card-title">{{service.title}}</h1>
+                                    <p class="card-text">{{service.contents}}</p>
+                                </div>
+                            </div>
+                        </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>    
+
+{% endblock %}

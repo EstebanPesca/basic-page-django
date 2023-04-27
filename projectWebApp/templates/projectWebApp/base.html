@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-lg-3">
+        <div class="container-fluid">
+            <a class="navbar-brand text-uppercase font-weight-bold d-lg-none" href="{% url 'Home' %}">Market Night</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item px-lg-3">
+                        <a class="nav-link text-uppercase text-expanded {% if request.path == '/' %}active{% endif %}"
+                        href="{% url 'Home' %}">Home</a> 
+                    </li>
+                    <li class="nav-item px-lg-3">
+                        <a class="nav-link text-uppercase text-expanded {% if request.path == '/service/' %} active {% endif %}" 
+                        href="{% url 'Service' %}">Service</a>
+                    </li>
+                    <li class="nav-item px-lg-3">
+                        <a class="nav-link text-uppercase text-expanded {% if request.path == '/store/' %} active {% endif %}" 
+                        href="{% url 'Store' %}">Store</a>
+                    </li>
+                    <li class="nav-item px-lg-3">
+                        <a class="nav-link text-uppercase text-expanded {% if request.path|slice:':6' == '/blog/' %} active {% endif %}" 
+                        href="{% url 'Blog' %}">Blog</a>
+                    </li>
+                    <li class="nav-item px-lg-3">
+                        <a class="nav-link text-uppercase text-expanded {% if request.path == '/contact/' %} active {% endif %}" 
+                        href="{% url 'Contact' %}">Contact us</a>
+                    </li>
+                    <li class="nav-item px-lg-3">
+                        <div class="text-center ms-3">
+                            {% if user.is_authenticated %}
+                            <div>
+                                <p class="text-white">Hola {{ user.username }}
+                                </br> 
+                                <a class="link link-secondary" href="{% url 'Logout' %}">Logout</a></p>
+                            </div>
+                
+                            {% else %}
+                            <div style="width: 50px;">
+                                <p class="link link-secondary text-decoration-none">
+                                    <a href="{% url 'Login' %}" class="link link-secondary">Login</a>
+                                    </br>
+                                    <a href="{% url 'Register' %}" class="link link-secondary">Sign in</a>
+                                </p>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% block content %}
+
+    {% endblock %}
+
+    <footer class="footer py-4 m-auto text-center bg-dark py-5">
+        <div class="container">
+            <p class="m-0">
+                <a href="#" class="link">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                <a href="#" class="link">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                <a href="#" class="link">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+            </p>
+            <p class="m-0 mbt">
+                <a href="#" class="link">Politica privada</a>
+                <a href="#" class="link">Aviso Legal</a>
+                <a href="#" class="link">Cookies</a>
+            </p>
+            <p class="m-0 mbt1" style="color: white;">&copy; Market Night 2022</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+</body>
+</html>
